@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace TcpHolePunchingServer
 {
@@ -9,12 +10,12 @@ namespace TcpHolePunchingServer
             string ip;
             Console.WriteLine("Enter the ip Address");
             ip = Console.ReadLine();
-            CommunicationLayer server = new CommunicationLayer(ip,6000);
-            server.AcceptConnection();
-            server.SendData("Connected To the Network");
-            string s = server.ReceiveData();
-            Console.WriteLine("Data Received {0}", s);
+            Server server = new Server(ip);
+            server.StartServer(2);
+
         }
+
+
 
     }
 }
