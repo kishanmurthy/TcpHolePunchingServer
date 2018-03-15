@@ -24,7 +24,7 @@ namespace TcpHolePunchingServer
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception ", e);
+                Console.WriteLine("Exception {0}", e);
             }
         }
 
