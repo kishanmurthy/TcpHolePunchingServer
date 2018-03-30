@@ -39,6 +39,7 @@ namespace TcpHolePunchingServer
                 stream = stream
 
             };
+            module.SetLocalEndPoint();
             communicationModule.Add(module);
             return module;
         }

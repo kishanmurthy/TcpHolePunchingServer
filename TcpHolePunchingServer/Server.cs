@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Net;
+using System.Net.Sockets;
+using System.Linq;
 
 namespace TcpHolePunchingServer
 {
@@ -36,7 +39,8 @@ namespace TcpHolePunchingServer
 
             communicationModule[0].SendData(communicationModule[1].socket.RemoteEndPoint.ToString());
             communicationModule[1].SendData(communicationModule[0].socket.RemoteEndPoint.ToString());
-
+            communicationModule[0].SendData(communicationModule[1].localEndPoint.ToString());
+            communicationModule[1].SendData(communicationModule[0].localEndPoint.ToString());
         }
 
 

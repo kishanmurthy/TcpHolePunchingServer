@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -11,6 +12,16 @@ namespace TcpHolePunchingServer
     {
         public Stream stream { get; set; }
         public Socket socket { get; set; }
+        public IPEndPoint localEndPoint { get; set; }
+
+        public void SetLocalEndPoint()
+        {
+            var localEndPointString = ReceiveData();
+            var localEndPointList = localEndPointString.Split(':');
+            var ipAddress = localEndPointList[0].Split('.').Select(i => Convert.ToByte(i)).ToArray();
+            localEndPoint = new IPEndPoint(new IPAddress(ipAddress), int.Parse(localEndPointList[1]));
+        }
+
 
         public String ReceiveData(int filesize)
         {
@@ -34,6 +45,14 @@ namespace TcpHolePunchingServer
             var bytes = Encoding.ASCII.GetBytes(str);
             stream.Write(bytes, 0, bytes.Length);
             ReceiveOk();
+        }
+
+        public String ReceiveData()
+        {
+            var bytes = new byte[1024];
+            int received = stream.Read(bytes, 0, 1024);
+            SendOk();
+            return Encoding.ASCII.GetString(bytes, 0, received);
         }
 
         public double[][] ReceiveDataSet(int filesize)
