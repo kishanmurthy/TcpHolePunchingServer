@@ -36,12 +36,10 @@ namespace TcpHolePunchingServer
             {
                 threads[i].Join();
             }
-            communicationModule[0].SendData(communicationModule[0].socket.RemoteEndPoint.ToString());
-            communicationModule[1].SendData(communicationModule[1].socket.RemoteEndPoint.ToString());
+
             communicationModule[0].SendData(communicationModule[1].socket.RemoteEndPoint.ToString());
             communicationModule[1].SendData(communicationModule[0].socket.RemoteEndPoint.ToString());
-            communicationModule[0].SendData(communicationModule[1].localEndPoint.ToString());
-            communicationModule[1].SendData(communicationModule[0].localEndPoint.ToString());
+
         }
 
 
